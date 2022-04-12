@@ -24,6 +24,8 @@
 
 - GameManager : 전체 게임 관리
 - BaseballGame : 숫자 야구 게임 한 경기
+- 게임 초기화
+
 ### 1. Player
 
 - 숫자 입력
