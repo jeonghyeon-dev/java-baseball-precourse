@@ -1,8 +1,7 @@
-## 미션 요구 사항
+# 미션 요구 사항
 
----
 
-### 기능 요구 사항
+## 기능 요구 사항
 
 ```markdown
 - 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
@@ -16,26 +15,56 @@
 - 게임을 종료한 후 게임을 다시 시작하거나 완전히 종료할 수 있다.
 - 사용자가 잘못된 값을 입력할 경우 illegalArgumentException을 발생시킨 후 애플리케이션을 종료한다. 
 ```
-## 기능 구현 목록 정리
+# 기능 구현 목록 정리
+
+
+## Model
+
+--- 
+
+### Player
+
+- 숫자 입력
+- 유효성 검사
+
+### Computer
+
+- 숫자 재생성 기능
+
+### Number
+##### Player, Computer 가 갖는 숫자
+- 난수 생성
+- 입력 숫자 유효성 검사
+  - 1~9 숫자 체크
+  - 중복 체크 
+
+### Referee
+
+- 게임 결과 판단(Player, Computer 숫자 비교)
+- 게임 재시작 여부 확인
+
+## View
 
 ---
 
-### 0. GamgManager/BaseballGame
+### Input
 
-- GameManager : 전체 게임 관리
-- BaseballGame : 숫자 야구 게임 한 경기
-- 게임 초기화
+- 숫자를 입력해주세요
+-  게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요
 
-### 1. Player
+### Output
 
-- 숫자 입력
-- 입력값 체크 (1 ~ 9 숫자가 아닌 경우 에러)
+- Refree 판단 결과 출력
 
-### 2. Computer
+## Controller
 
-- 3자리 난수 생성
+---
+### GamgManager
 
-### 3. Referee
+- 전체 게임 관리
 
-- Computer 와 Player 의 숫자 비교
-- 게임 재시작 여부 확인
+### BaseballGame
+
+- 숫자 야구 게임 한 경기
+
+
