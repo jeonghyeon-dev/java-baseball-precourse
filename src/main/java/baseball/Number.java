@@ -13,7 +13,7 @@ public class Number {
     private static final int END_INCLSIVE = 9;
     private static final int MAX_SIZE_OF_NUMBERS = 3;
 
-    private List<Integer> numbers = new ArrayList<>();
+    private List<Integer> number = new ArrayList<>();
 
     public Number() {
         generateRandomNumbers();
@@ -22,28 +22,29 @@ public class Number {
     public Number(String str){
         List<Integer> inputNumbers = convertStringToList(str);
 
-        try {
+        try{
             isValidNumbers(inputNumbers);
-        }catch (IllegalArgumentException iae){
-            System.out.println(iae.getMessage());
+        }catch (IllegalArgumentException illegalArgumentException){
+            System.out.println(illegalArgumentException.getMessage());
+            System.exit(0);
         }
 
-        this.numbers = inputNumbers;
+        this.number = inputNumbers;
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return number;
     }
 
     private void generateRandomNumbers(){
         for(int i = 0; i < MAX_SIZE_OF_NUMBERS; i++){
-            numbers.add(getRandomNumber());
+            number.add(getRandomNumber());
         }
     }
 
     private int getRandomNumber(){
         int randomNumber = pickNumberInRange(START_INCLUSIVE, END_INCLSIVE);
-        if(numbers.contains(randomNumber)){
+        if(number.contains(randomNumber)){
             return getRandomNumber();
         }
         return randomNumber;
@@ -59,6 +60,7 @@ public class Number {
 
         if(!is3Digit(numbers))
             throw new IllegalArgumentException(Message.getIsNot3DigitMessage());
+
     }
 
     private  boolean isNumeric(List<Integer> numbers){
