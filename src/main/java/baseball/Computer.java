@@ -2,10 +2,14 @@ package baseball;
 
 public class Computer {
 
-    Number baseballModel;
+    Number number;
 
     public Computer() {
-        this.baseballModel = new Number();
+        this.number = new Number();
     }
 
+    public void reGenerateNumber(){
+        number.clear();
+        number.generateRandomNumbers();
+    }
 }
