@@ -1,7 +1,10 @@
 package baseball;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
 public class Number {
@@ -16,8 +19,16 @@ public class Number {
         generateRandomNumbers();
     }
 
-    public Number(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Number(String str){
+        List<Integer> inputNumbers = convertStringToList(str);
+
+        try {
+            isValidNumbers(inputNumbers);
+        }catch (IllegalArgumentException iae){
+            System.out.println(iae.getMessage());
+        }
+
+        this.numbers = inputNumbers;
     }
 
     public List<Integer> getNumbers() {
@@ -36,5 +47,42 @@ public class Number {
             return getRandomNumber();
         }
         return randomNumber;
+    }
+
+    private void isValidNumbers(List<Integer> numbers)
+            throws IllegalArgumentException{
+        if(!isNumeric(numbers))
+            throw new IllegalArgumentException(Message.getIsNotNumericMessage());
+
+        if(!isDintinct(numbers))
+            throw new IllegalArgumentException(Message.getIsNotDistinctMessage());
+
+        if(!is3Digit(numbers))
+            throw new IllegalArgumentException(Message.getIsNot3DigitMessage());
+    }
+
+    private  boolean isNumeric(List<Integer> numbers){
+        boolean ret = true;
+        for(int number : numbers)
+            ret = number >= START_INCLUSIVE && number <= END_INCLSIVE ? true : false;
+
+        return ret;
+    }
+
+    private boolean isDintinct(List<Integer> numbers){
+        Set<Integer> setOfNumbers = new HashSet<>(numbers);
+        return setOfNumbers.size() == numbers.size();
+    }
+
+    private boolean is3Digit(List<Integer> numbers){
+        return numbers.size() == MAX_SIZE_OF_NUMBERS;
+    }
+
+    private List<Integer> convertStringToList(String str){
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < str.length(); i++)
+            list.add(str.charAt(i)-'0');
+
+        return list;
     }
 }
