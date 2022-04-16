@@ -1,7 +1,6 @@
 package baseball;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Referee {
 
@@ -29,13 +28,13 @@ public class Referee {
 
     private void calculationCountfOfStrike(List<Integer> computerNumber, List<Integer> playerNumber) {
         for (int i = 0; i < computerNumber.size(); i++) {
-            countOfStrike += Objects.equals(computerNumber.get(i), playerNumber.get(i)) ? 1 : 0;
+            countOfStrike += getSameCountNumber(computerNumber.get(i), playerNumber.get(i));
         }
     }
 
     private void calculationCountOfBall(List<Integer> computerNumber, List<Integer> playerNumber) {
         for (int number : computerNumber) {
-            countOfBall += playerNumber.contains(number) ? 1 : 0;
+            countOfBall += getSameCountNumber(number, playerNumber)
         }
         countOfBall = countOfBall - countOfStrike;
     }
@@ -43,5 +42,17 @@ public class Referee {
     private void clear() {
         countOfStrike = 0;
         countOfBall = 0;
+    }
+
+    private int getSameCountNumber(int computerNumber, int playerNumber) {
+        if (computerNumber == playerNumber)
+            return 1;
+        return 0;
+    }
+
+    private int getSameCountNumber(int computerNumber, List<Integer> playerNumber) {
+        if (playerNumber.contains(computerNumber))
+            return 1;
+        return 0;
     }
 }
