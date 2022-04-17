@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Referee {
 
+    private boolean isCorrect;
     private int countOfStrike;
     private int countOfBall;
 
     public Referee() {
+        isCorrect = false;
         countOfStrike = 0;
         countOfBall = 0;
     }
@@ -20,10 +22,16 @@ public class Referee {
         return countOfBall;
     }
 
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
     public void judgment(Computer computer, Player player) {
         clear();
         calculationCountfOfStrike(computer.getNumber().getNumber(), player.getNumber().getNumber());
         calculationCountOfBall(computer.getNumber().getNumber(), player.getNumber().getNumber());
+        if(countOfStrike == 3)
+            isCorrect = true;
     }
 
     private void calculationCountfOfStrike(List<Integer> computerNumber, List<Integer> playerNumber) {
@@ -34,12 +42,13 @@ public class Referee {
 
     private void calculationCountOfBall(List<Integer> computerNumber, List<Integer> playerNumber) {
         for (int number : computerNumber) {
-            countOfBall += getSameCountNumber(number, playerNumber)
+            countOfBall += getSameCountNumber(number, playerNumber);
         }
         countOfBall = countOfBall - countOfStrike;
     }
 
-    private void clear() {
+    public void clear() {
+        isCorrect = false;
         countOfStrike = 0;
         countOfBall = 0;
     }
@@ -55,4 +64,5 @@ public class Referee {
             return 1;
         return 0;
     }
+
 }
