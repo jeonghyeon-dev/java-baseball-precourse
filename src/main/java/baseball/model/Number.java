@@ -1,4 +1,6 @@
-package baseball;
+package baseball.model;
+
+import baseball.util.Message;
 
 import java.util.ArrayList;
 import java.util.HashSet;
